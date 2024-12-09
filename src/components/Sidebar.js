@@ -32,18 +32,37 @@ const Sidebar = () => {
   const hiddenPaths = ["/login", "/register"];
   if (hiddenPaths.includes(location.pathname)) return null;
 
+  // Menu items
   const menuItems = [
     { text: "Overview", icon: <DashboardIcon />, path: "/overview" },
     { text: "Reports", icon: <BarChartIcon />, path: "/reports" },
     { text: "User Creation", icon: <PersonAddIcon />, path: "/userCreation" },
     { text: "Screen", icon: <ScreenShareIcon />, path: "/screen" },
     { text: "Listing", icon: <ListAltIcon />, path: "/listing" },
-    {
-      text: "Approved List",
-      icon: <VerifiedIcon />,
-      path: "/ApprovedList",
-    },
+    { text: "Approved List", icon: <VerifiedIcon />, path: "/ApprovedList" },
   ];
+
+  // Retrieve screens from localStorage
+  const responseScreens = localStorage.getItem("responseScreens");
+  // let allowedScreens = [];
+  let parsedScreens = [];
+
+  try {
+    if (responseScreens) {
+      parsedScreens = JSON.parse(responseScreens);
+      // allowedScreens = parsedScreens.map((screen) => screen.screenName);
+    }
+  } catch (error) {
+    console.error("Error parsing responseScreens:", error);
+  }
+
+  // Filter menu items based on allowedScreens
+  const filteredMenuItems = menuItems.filter((menu) =>
+    parsedScreens.includes(menu.text.toUpperCase())
+  );
+
+  console.log("menuItems", menuItems);
+  console.log("filteredMenuItems", filteredMenuItems);
 
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#FCE212" }}>
@@ -102,7 +121,7 @@ const Sidebar = () => {
         </Toolbar>
         <Box sx={{ padding: "20px 10px" }}>
           <List>
-            {menuItems.map((item, index) => (
+            {filteredMenuItems.map((item, index) => (
               <ListItem
                 button
                 component={Link}
@@ -123,7 +142,7 @@ const Sidebar = () => {
                   "&:hover": {
                     backgroundColor: "#FCE212",
                     transform: "scale(1.05)",
-                    color: "#000000", // Ensures text turns black on hover
+                    color: "#000000",
                   },
                 }}
               >
@@ -133,7 +152,7 @@ const Sidebar = () => {
                     color:
                       location.pathname === item.path ? "#000000" : "#FFFFFF",
                     "&:hover": {
-                      color: "#000000", // Turns icon black on hover
+                      color: "#000000",
                     },
                   }}
                 >
@@ -149,9 +168,9 @@ const Sidebar = () => {
                         color:
                           location.pathname === item.path
                             ? "#000000"
-                            : "#FFFFFF", // Text color
+                            : "#FFFFFF",
                         "&:hover": {
-                          color: "#000000", // Turns text black on hover
+                          color: "#000000",
                         },
                       },
                     }}
