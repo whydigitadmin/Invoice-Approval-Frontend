@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import ResetPasswordPopup from "../utils/ResetPassword";
 
 const Header = () => {
   const location = useLocation();
@@ -90,10 +91,13 @@ const Header = () => {
             onClick={handlePopoverOpen}
             style={{ cursor: "pointer" }}
           >
-            {localStorage.getItem("nickName")}{" "}
+         Welcome!!! &nbsp;   {localStorage.getItem("nickName")}{" "}
             {/* Replace with actual user's name */}
           </Typography>
         </Box>
+
+        <ResetPasswordPopup/>
+        &nbsp;&nbsp;
 
         {/* User Popover */}
         <Popover
