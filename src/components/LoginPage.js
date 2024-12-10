@@ -324,7 +324,7 @@ const LoginPage = () => {
       </div>
 </div> */}
 
-        <div class="img">
+        <div className="img">
           {/* <img  src='https://i.pinimg.com/originals/66/b0/02/66b002f6f5022553a6cf52d8d01241df.gif' /> */}
 
           {/* <img src={butterfly}></img> */}
@@ -382,8 +382,8 @@ const LoginPage = () => {
                 {" "}
               </h3>
 
-              <div class="square">
-                <p class="square__text">
+              <div className="square">
+                <p className="square__text">
                   {/* <span class="square__text__gradient"> */}
                   Welcome To UGS Portal
                   {/* </span> */}
