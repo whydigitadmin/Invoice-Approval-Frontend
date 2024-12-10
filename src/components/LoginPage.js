@@ -385,7 +385,7 @@ const LoginPage = () => {
               <div class="square">
                 <p class="square__text">
                   {/* <span class="square__text__gradient"> */}
-                  Welcome To UGS
+                  Welcome To UGS Portal
                   {/* </span> */}
                 </p>
               </div>
