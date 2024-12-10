@@ -1,15 +1,14 @@
+import { MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { Alert, Button, Card, Input, Space, Typography } from "antd";
 import axios from "axios";
+import confetti from "canvas-confetti";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { encryptPassword } from "../utils/passEnc";
-import logo from "../logo.png";
 import logoonly from "../logoonly.png";
-import { SunOutlined, MoonOutlined } from "@ant-design/icons";
-import "./style.css";
+import Loader from "../utils/Loader";
+import { encryptPassword } from "../utils/passEnc";
 import "./logintest1.css";
-import butterfly from "../butterfly.gif";
-import confetti from "canvas-confetti";
+import "./style.css";
 
 const { Text } = Typography;
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8091";
@@ -137,7 +136,7 @@ const LoginPage = () => {
             .screensVO
         );
         localStorage.setItem("responseScreens", responseScreens);
-
+        setLoading(false);
         navigate("/listing");
       } else {
         setError("Login failed. Please try again.");
@@ -332,10 +331,9 @@ const LoginPage = () => {
           {/* <br/> */}
 
           <h2 style={{ ...baseStyle, ...elegantShadowStyle }}>
-            <img src={logoonly} width="200" ></img>   
-          Uniworld <br/>
-          Logistics
-
+            <img src={logoonly} width="200"></img>
+            Uniworld <br />
+            Logistics
             {/* <span>Uniworld</span> <br/>
   <span>Logistics</span> */}
           </h2>
@@ -485,6 +483,7 @@ const LoginPage = () => {
               {theme === "light" ? "Dark Mode" : "Light Mode"}
             </Button>
           </Space>
+          {loading && <Loader />}
         </Card>
       </div>
     </>
