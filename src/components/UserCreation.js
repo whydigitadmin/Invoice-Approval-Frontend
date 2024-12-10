@@ -401,6 +401,8 @@ export const UserCreation = () => {
               </MenuItem>
               <MenuItem value="Admin">Admin</MenuItem>
               <MenuItem value="User">User</MenuItem>
+              <MenuItem value="approve1">Approve1</MenuItem>
+              <MenuItem value="approve2">Approve2</MenuItem>
             </Select>
           </Grid>
           <Grid item xs={3}>

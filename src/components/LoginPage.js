@@ -332,9 +332,9 @@ const LoginPage = () => {
           {/* <br/> */}
 
           <h2 style={{ ...baseStyle, ...elegantShadowStyle }}>
-            {/* <img src={logoonly} width="200" ></img>   
+            <img src={logoonly} width="200" ></img>   
           Uniworld <br/>
-          Logistics */}
+          Logistics
 
             {/* <span>Uniworld</span> <br/>
   <span>Logistics</span> */}

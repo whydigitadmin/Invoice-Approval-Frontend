@@ -96,6 +96,10 @@ const ListingPage = () => {
 
   useEffect(() => {
     fetchData();
+    const intervalId = setInterval(fetchData, 180000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
 
   const fetchData = () => {
