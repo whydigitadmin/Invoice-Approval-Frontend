@@ -29,7 +29,7 @@ const Sidebar = () => {
     setOpen(!open);
   };
 
-  const hiddenPaths = ["/login", "/register"];
+  const hiddenPaths = ["/login", "/register","/authenticate"];
   if (hiddenPaths.includes(location.pathname)) return null;
 
   // Menu items
@@ -40,6 +40,7 @@ const Sidebar = () => {
     { text: "Screen", icon: <ScreenShareIcon />, path: "/screen" },
     { text: "Listing", icon: <ListAltIcon />, path: "/listing" },
     { text: "Approved List", icon: <VerifiedIcon />, path: "/ApprovedList" },
+    { text: "Approved2 List", icon: <VerifiedIcon />, path: "/Approved2List" },
   ];
 
   // Retrieve screens from localStorage

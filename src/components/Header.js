@@ -20,7 +20,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const hiddenPaths = ["/login", "/register"]; // Add other paths as needed
+  const hiddenPaths = ["/login", "/register","/authenticate"]; // Add other paths as needed
 
   // Hide the sidebar if the current path matches one of the hidden paths
   if (hiddenPaths.includes(location.pathname)) {

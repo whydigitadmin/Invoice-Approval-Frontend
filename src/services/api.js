@@ -72,6 +72,43 @@ export const getInvDetailsApprove1 = async () => {
   }
 };
 
+
+export const getInvDetailsApprove2 = async () => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/api/InvoiceApproval/getInvDetailsApprove2?userType=${localStorage.getItem(
+        "userType"
+      )}&userName=${localStorage.getItem("userName")}`
+    ); // Replace `/your-api-endpoint` with the actual endpoint path
+    if (
+      response.data.status &&
+      response.data.paramObjectsMap?.approvedApprovalDetails2
+    ) {
+      return response.data.paramObjectsMap.approvedApprovalDetails2.map(
+        (item) => ({
+          expenceId: item.docId,
+          name: item.partyName,
+          amount: item.totalInvAmtLc,
+          currency: "INR", // Assuming it's always INR; adjust if needed.
+          docId: item.docId,
+          docDate: item.docDate,
+          creditDays: item.creditDays,
+          creditLimit: item.creditLimit,
+          outStanding: item.outStanding,
+          id: item.gstInvoiceHdrId,
+          approved1on: item.approve1on,
+          approved2on: item.approve2on,
+        })
+      );
+    } else {
+      throw new Error("Data not found or API error");
+    }
+  } catch (error) {
+    console.error("Error fetching listing data:", error);
+    throw error;
+  }
+};
+
 export const getAllUsers = async () => {
   try {
     // Corrected the endpoint URL and closing braces issue

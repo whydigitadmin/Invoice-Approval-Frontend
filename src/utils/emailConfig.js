@@ -7,8 +7,8 @@ const SendEmail = async (updatedEmployee, toEmail, data) => {
   for (let i = 0; i < data.length; i++) {
     try {
       const item = data[i];
-      const approveLink = `http://localhost:3000/authenticate?action=approve&toEmail=${toEmail}&id=${item.id}`;
-      const rejectLink = `http://localhost:3000/authenticate?action=reject&toEmail=${toEmail}&id=${item.id}`;
+      const approveLink = `http://202.21.34.221:8090/authenticate?action=approve&toEmail=${toEmail}&id=${item.id}`;
+      const rejectLink = `http://202.21.34.221:8090/authenticate?action=reject&toEmail=${toEmail}&id=${item.id}`;
 
       const templateParams = {
         empName: updatedEmployee,

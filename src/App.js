@@ -9,6 +9,7 @@ import Overview from "./components/Overview";
 import { Reports } from "./components/Reports";
 import { Screen } from "./components/Screen";
 import { UserCreation } from "./components/UserCreation";
+import Approved2List from "./components/Approved2List";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/screen" element={<Screen />} />
           <Route path="/userCreation" element={<UserCreation />} />
+          <Route path="/approved2list" element={<Approved2List />} />
           {/* <Route path="/approvedReport" element={<ApprovedReport />} /> */}
         </Route>
       </Routes>

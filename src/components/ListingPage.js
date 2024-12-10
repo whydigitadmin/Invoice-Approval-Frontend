@@ -628,7 +628,52 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.currency}
                               </Text>
+                              </div>
+
+                              <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Credit Days:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.creditDays}
+                              </Text>
+                              </div>
+
+                              <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Credit Limit:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat('en-US').format(item.creditLimit)}
+                              </Text>
+                              </div>
+
+                              <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Total Due:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat('en-US').format(item.outStanding)}
+                              </Text>
                             </div>
+                            
 
                             <br />
                             {/* Approve/Reject Buttons on Card */}
