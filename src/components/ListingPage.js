@@ -50,7 +50,7 @@ const ListingPage = () => {
     endDate: null,
   });
   const [selectedItem, setSelectedItem] = useState(null); // Modal data
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
   const { RangePicker } = DatePicker; // Destructure RangePicker
@@ -169,7 +169,7 @@ const ListingPage = () => {
             : setEmailFlag(false);
         }
         fetchData();
-        setIsModalOpen(false);
+        // setIsModalOpen(false);
       } else {
         notification.error({
           message: `Item ${item.id} failed`,
@@ -201,7 +201,7 @@ const ListingPage = () => {
           description: `You have rejected item ${item.id}.`,
         });
         fetchData();
-        setIsModalOpen(false);
+        // setIsModalOpen(false);
       } else {
         notification.error({
           message: `Item ${item.id} failed`,
@@ -226,7 +226,7 @@ const ListingPage = () => {
 
   const handleCardClick = (item) => {
     setSelectedItem(item);
-    setIsModalOpen(true);
+    // setIsModalOpen(true);
   };
 
   const handleDateRangeChange = (dates, dateStrings) => {
@@ -734,7 +734,7 @@ const ListingPage = () => {
         </Row>
 
         {/* Modal for Item Details */}
-        <Modal
+        {/* <Modal
           visible={isModalOpen}
           onCancel={() => setIsModalOpen(false)}
           footer={null}
@@ -811,7 +811,7 @@ const ListingPage = () => {
               </Space>
             </div>
           )}
-        </Modal>
+        </Modal> */}
         {emailFlag && (
           <EmailConfig
             updatedEmployee={"Admin"}
