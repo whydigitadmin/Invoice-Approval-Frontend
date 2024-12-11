@@ -1,9 +1,13 @@
 import emailjs from "@emailjs/browser";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const SendEmail = async (updatedEmployee, toEmail, data) => {
+const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
+  if (emailSentFlag.current) return; // Prevent email sending if already triggered
+
+  emailSentFlag.current = true; // Set flag to prevent further email sends
+
   for (let i = 0; i < data.length; i++) {
     try {
       const item = data[i];
@@ -42,10 +46,18 @@ const SendEmail = async (updatedEmployee, toEmail, data) => {
 };
 
 const EmailConfig = ({ updatedEmployee, toEmail, data }) => {
+  const [emailSent, setEmailSent] = useState(false);
+  const emailSentFlag = useRef(false); // useRef should be inside the component
+
   useEffect(() => {
-    SendEmail(updatedEmployee, toEmail, data);
+    // Check if email has already been sent, to prevent triggering the email again
+    if (emailSentFlag.current) return; // Skip if email has already been sent
+
+    // Call SendEmail
+    SendEmail(updatedEmployee, toEmail, data, emailSentFlag);
+    setEmailSent(true); // Mark email as sent after the first call
     console.log("function called");
-  }, [updatedEmployee, toEmail, data]);
+  }, [updatedEmployee, toEmail, data]); // Removed emailSent from dependencies
 
   return null;
 };
