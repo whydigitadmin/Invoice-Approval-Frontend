@@ -10,7 +10,9 @@ import {
   Col,
   ConfigProvider,
   DatePicker,
+  Descriptions,
   Input,
+  Modal,
   notification,
   Popover,
   Row,
@@ -20,7 +22,7 @@ import {
   Typography,
 } from "antd";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getListingData } from "../services/api"; // mock API call
 import EmailConfig from "../utils/emailConfig";
@@ -100,15 +102,6 @@ const ListingPage = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    if (emailFlag) {
-      // Trigger the email component or logic here
-      console.log("Email triggered");
-      // Reset the emailFlag to prevent repeated triggering
-      setEmailFlag(false);
-    }
-  }, [emailFlag]);
-
   const fetchData = () => {
     setLoading(true);
     getListingData()
@@ -151,14 +144,8 @@ const ListingPage = () => {
   //   }
   // } : {};
 
-  const emailTriggeredRef = useRef(false);
-
   const handleApprove = async (item) => {
-    // Reset email flag at the beginning
     setEmailFlag(false);
-
-    // Create a ref to track if the email has been triggered
-
     try {
       const response = await axios.put(
         `${API_URL}/api/InvoiceApproval/approval1?approval=${"1"}&createdby=${localStorage.getItem(
@@ -167,39 +154,23 @@ const ListingPage = () => {
       );
 
       if (response.data.status === true) {
-        const audio = new Audio("/success.wav"); // Play sound for success
+        const audio = new Audio("/success.wav"); // Replace with your sound file path
         audio.play();
 
         notification.success({
           message: `Invoice ${item.id} Approved`,
           description: `You have successfully approved the Invoice ${item.id}.`,
         });
-
         setEmailData([item]);
-
-        // Check the condition to trigger the email
-        const shouldTriggerEmail =
+        {
           response.data.paramObjectsMap.gstInvoiceHdrVO.approveEmail === "T" &&
-          response.data.paramObjectsMap.gstInvoiceHdrVO.approve1 === "T";
-
-        // Trigger the email only if it hasn't been triggered yet
-        if (shouldTriggerEmail && !emailTriggeredRef.current) {
-          setEmailFlag(true); // Set flag to trigger the email
-          emailTriggeredRef.current = true; // Mark as triggered
+          response.data.paramObjectsMap.gstInvoiceHdrVO.approve1 === "T" 
+          
+            ? setEmailFlag(true)
+            : setEmailFlag(false);
         }
-
-        getListingData()
-          .then((response) => {
-            setData(response);
-            setLoading(false);
-          })
-          .catch(() => {
-            notification.error({
-              message: "Data Fetch Error",
-              description: "Failed to fetch updated data for the listing.",
-            });
-            setLoading(false);
-          });
+        fetchData();
+        // setIsModalOpen(false);
       } else {
         notification.error({
           message: `Item ${item.id} failed`,
@@ -662,9 +633,9 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.currency}
                               </Text>
-                            </div>
+                              </div>
 
-                            <div
+                              <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -676,23 +647,38 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.creditDays}
                               </Text>
-                            </div>
+                              </div>
 
-                            <div
+                              <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
                               }}
                             >
+
                               <Text strong style={{ flex: 1, color: "black" }}>
                                 Credit Limit:
                               </Text>
                               <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat("en-US").format(
-                                  item.creditLimit
-                                )}
+                                {new Intl.NumberFormat('en-IN').format(item.creditLimit)}
+                              </Text>
+                              </div>
+
+                              <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Total Due:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat('en-IN').format(item.outStanding)}
                               </Text>
                             </div>
+                            
 
                             <div
                               style={{
@@ -701,16 +687,29 @@ const ListingPage = () => {
                               }}
                             >
                               <Text strong style={{ flex: 1, color: "black" }}>
-                                Total Due:
+                                Due Days:
                               </Text>
                               <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat("en-US").format(
-                                  item.outStanding
-                                )}
+                                {item.exceedDays}
                               </Text>
-                            </div>
+                              </div>
 
-                            <br />
+                              <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                               <Text strong style={{ flex: 1, color: "black" }}>
+                                Exceeded:
+                              </Text>
+                              
+                              <Text strong style={{ color: "black" }}>
+                               <b> {item.slabRemarks} </b>
+                              </Text>
+                              </div>
+
+                            {/* <br /> */}
                             {/* Approve/Reject Buttons on Card */}
                             <Space style={{ marginTop: "10px" }}>
                               <Button

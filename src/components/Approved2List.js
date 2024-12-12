@@ -477,7 +477,7 @@ const Approved2List = () => {
                               </Text>
                             </div>
 
-                            <div
+                            {/* <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -493,8 +493,40 @@ const Approved2List = () => {
                                   ).toLocaleDateString("en-GB")}{" "}
                                 </Text>
                               )}
-                            </div>
+                            </div> */}
 
+{item.approved2on && (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}
+  >
+    <Text strong style={{ flex: 1, color: "black" }}>
+      2nd Approved On:
+    </Text>
+    <Text strong style={{ color: "black" }}>
+      {new Date(item.approved2on).toLocaleDateString("en-GB")}
+    </Text>
+  </div>
+)}
+
+
+{item.approved3on && (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}
+  >
+    <Text strong style={{ flex: 1, color: "black" }}>
+      2nd Approved On:
+    </Text>
+    <Text strong style={{ color: "black" }}>
+      {new Date(item.approved3on).toLocaleDateString("en-GB")}
+    </Text>
+  </div>
+)}
                             <Space
                               style={{ float: "right", marginTop: "10px" }}
                             >

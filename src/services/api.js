@@ -25,6 +25,9 @@ export const getListingData = async () => {
           creditLimit: item.creditLimit,
           outStanding: item.outStanding,
           id: item.gstInvoiceHdrId,
+          eligiSlab: item.eligiSlab,
+          slabRemarks: item.slabRemarks,
+          exceedDays: item.exceedDays
         })
       );
     } else {
@@ -98,6 +101,7 @@ export const getInvDetailsApprove2 = async () => {
           id: item.gstInvoiceHdrId,
           approved1on: item.approve1on,
           approved2on: item.approve2on,
+          approved3on: item.approve3on,
         })
       );
     } else {

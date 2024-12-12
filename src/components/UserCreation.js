@@ -403,6 +403,7 @@ export const UserCreation = () => {
               <MenuItem value="User">User</MenuItem>
               <MenuItem value="approve1">Approve1</MenuItem>
               <MenuItem value="approve2">Approve2</MenuItem>
+              <MenuItem value="approve3">Approve3</MenuItem>
             </Select>
           </Grid>
           <Grid item xs={3}>

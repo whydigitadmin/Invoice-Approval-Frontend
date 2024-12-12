@@ -19,22 +19,27 @@ const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
         toEmail,
         expenceId: item.expenceId,
         name: item.name,
-        amount: item.amount,
+        amount: item.amount ? new Intl.NumberFormat('en-IN').format(item.amount) : "0", 
         currency: item.currency,
         description: item.description || "N/A",
         docId: item.docId,
         docDate: item.docDate,
-        outstanding: item.outStanding,
-        creditLimit: item.creditLimit,
+        outStanding: 
+        item.outStanding ? new Intl.NumberFormat('en-IN').format(item.outStanding) : "0", // Indian format
+  creditLimit: 
+    item.creditLimit ? new Intl.NumberFormat('en-IN').format(item.creditLimit) : "0", // Indian format
+        exceedDays: item.exceedDays,
+        slabRemarks: item.slabRemarks,
+        creditDays: item.creditDays,
         approveLink,
         rejectLink,
       };
 
       const response = await emailjs.send(
-        "service_9y1nnmh",
-        "template_823h83c",
+        "service_q0hz34n",
+        "template_nbflxja",
         templateParams,
-        "A7IEQ6ucoMSeZNw--"
+        "gTWhyzzADVerWfkpS"
       );
 
       console.log(`Email sent successfully for item ${i + 1}:`, response);
