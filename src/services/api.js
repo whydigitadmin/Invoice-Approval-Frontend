@@ -27,7 +27,8 @@ export const getListingData = async () => {
           id: item.gstInvoiceHdrId,
           eligiSlab: item.eligiSlab,
           slabRemarks: item.slabRemarks,
-          exceedDays: item.exceedDays
+          exceedDays: item.exceedDays,
+          unApproveAmt: item.unApproveAmt
         })
       );
     } else {
@@ -64,6 +65,7 @@ export const getInvDetailsApprove1 = async () => {
           id: item.gstInvoiceHdrId,
           approved1on: item.approve1on,
           approved2on: item.approve2on,
+          eligiSlab: item.eligiSlab
         })
       );
     } else {
@@ -102,6 +104,7 @@ export const getInvDetailsApprove2 = async () => {
           approved1on: item.approve1on,
           approved2on: item.approve2on,
           approved3on: item.approve3on,
+          eligiSlab: item.eligiSlab
         })
       );
     } else {

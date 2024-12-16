@@ -40,6 +40,7 @@ const ListingPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [emailFlag, setEmailFlag] = useState(false);
+  const [emailFlag2, setEmailFlag2] = useState(false);
   const [emailData, setEmailData] = useState([]);
   const [userType, setUserType] = useState(localStorage.getItem("userType"));
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -145,32 +146,47 @@ const ListingPage = () => {
   // } : {};
 
   const handleApprove = async (item) => {
-    setEmailFlag(false);
     try {
       const response = await axios.put(
-        `${API_URL}/api/InvoiceApproval/approval1?approval=${"1"}&createdby=${localStorage.getItem(
-          "userName"
-        )}&id=${parseInt(item.id)}&userType=${localStorage.getItem("userType")}`
+        `${API_URL}/api/InvoiceApproval/approval1?approval=${"1"}&createdby=${localStorage.getItem("userName")}&id=${parseInt(item.id)}&userType=${localStorage.getItem("userType")}`
       );
-
+  
       if (response.data.status === true) {
         const audio = new Audio("/success.wav"); // Replace with your sound file path
         audio.play();
-
+  
         notification.success({
           message: `Invoice ${item.id} Approved`,
           description: `You have successfully approved the Invoice ${item.id}.`,
         });
+  
         setEmailData([item]);
-        {
+  
+        // Handle first email flag logic
+        if (
           response.data.paramObjectsMap.gstInvoiceHdrVO.approveEmail === "T" &&
-          response.data.paramObjectsMap.gstInvoiceHdrVO.approve1 === "T" 
-          
-            ? setEmailFlag(true)
-            : setEmailFlag(false);
+          response.data.paramObjectsMap.gstInvoiceHdrVO.approve1 === "T" &&
+          response.data.paramObjectsMap.gstInvoiceHdrVO.eligiSlab === 2
+        ) {
+          setEmailFlag(true);
+        } else {
+          setEmailFlag(false);
         }
+  
+        // Handle second email flag logic
+        if (
+          response.data.paramObjectsMap.gstInvoiceHdrVO.approveEmail === "T" &&
+          response.data.paramObjectsMap.gstInvoiceHdrVO.approve1 === "T" &&
+          response.data.paramObjectsMap.gstInvoiceHdrVO.eligiSlab === 3
+        ) {
+          setEmailFlag2(true);
+        } else {
+          setEmailFlag2(false);
+        }
+  
         fetchData();
-        // setIsModalOpen(false);
+        // setIsModalOpen(false); // Uncomment if necessary
+  
       } else {
         notification.error({
           message: `Item ${item.id} failed`,
@@ -182,8 +198,13 @@ const ListingPage = () => {
         error.response?.data?.paramObjectsMap?.errorMessage ||
         error.response?.data?.message ||
         "An unexpected error occurred. Please try again.";
+      notification.error({
+        message: "Error",
+        description: errorMessage,
+      });
     }
   };
+  
 
   const handleReject = async (item) => {
     try {
@@ -678,6 +699,22 @@ const ListingPage = () => {
                                 {new Intl.NumberFormat('en-IN').format(item.outStanding)}
                               </Text>
                             </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                UnApproved:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat('en-IN').format(item.unApproveAmt)}
+                              </Text>
+                            </div>
+                            
                             
 
                             <div
@@ -842,10 +879,18 @@ const ListingPage = () => {
             </div>
           )}
         </Modal> */}
-        {emailFlag && (
+        {emailFlag &&  (
           <EmailConfig
             updatedEmployee={"Admin"}
             toEmail={"Jayabalan.guru@uniworld-logistics.com"}
+            data={emailData}
+          />
+        )}
+
+{emailFlag2 &&  (
+          <EmailConfig
+            updatedEmployee={"Admin"}
+            toEmail={"Jayabalan.guru@uniworld-logistics.com,gjayabalan08@gmail.com"}
             data={emailData}
           />
         )}

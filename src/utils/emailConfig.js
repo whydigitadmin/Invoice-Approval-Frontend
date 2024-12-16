@@ -24,10 +24,8 @@ const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
         description: item.description || "N/A",
         docId: item.docId,
         docDate: item.docDate,
-        outStanding: 
-        item.outStanding ? new Intl.NumberFormat('en-IN').format(item.outStanding) : "0", // Indian format
-  creditLimit: 
-    item.creditLimit ? new Intl.NumberFormat('en-IN').format(item.creditLimit) : "0", // Indian format
+        outStanding: item.outStanding ? new Intl.NumberFormat('en-IN').format(item.outStanding) : "0", // Indian format
+        creditLimit: item.creditLimit ? new Intl.NumberFormat('en-IN').format(item.creditLimit) : "0", // Indian format
         exceedDays: item.exceedDays,
         slabRemarks: item.slabRemarks,
         creditDays: item.creditDays,
