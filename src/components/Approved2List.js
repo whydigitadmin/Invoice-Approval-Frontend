@@ -467,6 +467,35 @@ const Approved2List = () => {
                                 justifyContent: "space-between",
                               }}
                             >
+                            <Text strong style={{ flex: 1, color: "black" }}>
+                                Credit Days:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.creditDays}
+                                </Text>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                            <Text strong style={{ flex: 1, color: "black" }}>
+                                Credit Limit:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).format(item.creditLimit)}
+                                </Text>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
                               <Text strong style={{ flex: 1, color: "black" }}>
                                 1st Approved On:
                               </Text>

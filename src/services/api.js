@@ -104,7 +104,8 @@ export const getInvDetailsApprove2 = async () => {
           approved1on: item.approve1on,
           approved2on: item.approve2on,
           approved3on: item.approve3on,
-          eligiSlab: item.eligiSlab
+          eligiSlab: item.eligiSlab,
+          totalInvAmtLc: item.totalInvAmtLc
         })
       );
     } else {
