@@ -54,16 +54,16 @@ p {
 }
 
 .sticky-note {
-  width: 300px;
-  min-height: 300px;
-  padding: 1em;
-  font-size: 20px;
-  letter-spacing: 2px;
+  width: 270px;
+  min-height: 270px;
+  padding: 0.7em;
+  font-size: 18px;
+  letter-spacing: 1px;
   outline: none;
   position: relative;
-  margin-top: 50px;
-  margin-bottom: 10px;
-  padding-top: 40px;
+  margin-top: 45px;
+  margin-bottom: 8px;
+  padding-top: 36px;
 }
 
 .sticky-note::before {

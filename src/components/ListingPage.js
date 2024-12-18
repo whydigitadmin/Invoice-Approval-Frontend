@@ -10,9 +10,7 @@ import {
   Col,
   ConfigProvider,
   DatePicker,
-  Descriptions,
   Input,
-  Modal,
   notification,
   Popover,
   Row,
@@ -148,20 +146,22 @@ const ListingPage = () => {
   const handleApprove = async (item) => {
     try {
       const response = await axios.put(
-        `${API_URL}/api/InvoiceApproval/approval1?approval=${"1"}&createdby=${localStorage.getItem("userName")}&id=${parseInt(item.id)}&userType=${localStorage.getItem("userType")}`
+        `${API_URL}/api/InvoiceApproval/approval1?approval=${"1"}&createdby=${localStorage.getItem(
+          "userName"
+        )}&id=${parseInt(item.id)}&userType=${localStorage.getItem("userType")}`
       );
-  
+
       if (response.data.status === true) {
         const audio = new Audio("/success.wav"); // Replace with your sound file path
         audio.play();
-  
+
         notification.success({
           message: `Invoice ${item.id} Approved`,
           description: `You have successfully approved the Invoice ${item.id}.`,
         });
-  
+
         setEmailData([item]);
-  
+
         // Handle first email flag logic
         if (
           response.data.paramObjectsMap.gstInvoiceHdrVO.approveEmail === "T" &&
@@ -172,7 +172,7 @@ const ListingPage = () => {
         } else {
           setEmailFlag(false);
         }
-  
+
         // Handle second email flag logic
         if (
           response.data.paramObjectsMap.gstInvoiceHdrVO.approveEmail === "T" &&
@@ -183,10 +183,9 @@ const ListingPage = () => {
         } else {
           setEmailFlag2(false);
         }
-  
+
         fetchData();
         // setIsModalOpen(false); // Uncomment if necessary
-  
       } else {
         notification.error({
           message: `Item ${item.id} failed`,
@@ -204,7 +203,6 @@ const ListingPage = () => {
       });
     }
   };
-  
 
   const handleReject = async (item) => {
     try {
@@ -596,12 +594,12 @@ const ListingPage = () => {
                                 {item.name}
                               </Text>
                             </div>
-                            <br />
 
                             <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-evenly",
+                                marginTop: "10px",
                               }}
                             >
                               <Text strong style={{ flex: 1, color: "black" }}>
@@ -654,9 +652,9 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.currency}
                               </Text>
-                              </div>
+                            </div>
 
-                              <div
+                            <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -668,35 +666,21 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.creditDays}
                               </Text>
-                              </div>
+                            </div>
 
-                              <div
+                            <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
                               }}
                             >
-
                               <Text strong style={{ flex: 1, color: "black" }}>
                                 Credit Limit:
                               </Text>
                               <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat('en-IN').format(item.creditLimit)}
-                              </Text>
-                              </div>
-
-                              <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Total Due:
-                              </Text>
-                              <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat('en-IN').format(item.outStanding)}
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.creditLimit
+                                )}
                               </Text>
                             </div>
 
@@ -706,16 +690,31 @@ const ListingPage = () => {
                                 justifyContent: "space-between",
                               }}
                             >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Total Due:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.outStanding
+                                )}
+                              </Text>
+                            </div>
 
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
                               <Text strong style={{ flex: 1, color: "black" }}>
                                 UnApproved:
                               </Text>
                               <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat('en-IN').format(item.unApproveAmt)}
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.unApproveAmt
+                                )}
                               </Text>
                             </div>
-                            
-                            
 
                             <div
                               style={{
@@ -729,22 +728,22 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.exceedDays}
                               </Text>
-                              </div>
+                            </div>
 
-                              <div
+                            <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
                               }}
                             >
-                               <Text strong style={{ flex: 1, color: "black" }}>
+                              <Text strong style={{ flex: 1, color: "black" }}>
                                 Exceeded:
                               </Text>
-                              
+
                               <Text strong style={{ color: "black" }}>
-                               <b> {item.slabRemarks} </b>
+                                <b> {item.slabRemarks} </b>
                               </Text>
-                              </div>
+                            </div>
 
                             {/* <br /> */}
                             {/* Approve/Reject Buttons on Card */}
@@ -879,7 +878,7 @@ const ListingPage = () => {
             </div>
           )}
         </Modal> */}
-        {emailFlag &&  (
+        {emailFlag && (
           <EmailConfig
             updatedEmployee={"Admin"}
             toEmail={"Jayabalan.guru@uniworld-logistics.com"}
@@ -887,10 +886,12 @@ const ListingPage = () => {
           />
         )}
 
-{emailFlag2 &&  (
+        {emailFlag2 && (
           <EmailConfig
             updatedEmployee={"Admin"}
-            toEmail={"Jayabalan.guru@uniworld-logistics.com,gjayabalan08@gmail.com"}
+            toEmail={
+              "Jayabalan.guru@uniworld-logistics.com,gjayabalan08@gmail.com"
+            }
             data={emailData}
           />
         )}

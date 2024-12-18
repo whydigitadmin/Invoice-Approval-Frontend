@@ -316,7 +316,7 @@ const Approved2List = () => {
                 >
                   {/* <Text strong style={{ fontSize: '20px' }}>Approved Lists</Text> */}
 
-                  <p>Approved Lists</p>
+                  <p>Approved Listss</p>
 
                   <div>
                     <Button
@@ -402,11 +402,12 @@ const Approved2List = () => {
                                 {item.name}
                               </Text>
                             </div>
-                            <br />
+
                             <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
+                                marginTop: "8px",
                               }}
                             >
                               <Text strong style={{ flex: 1, color: "black" }}>
@@ -467,12 +468,12 @@ const Approved2List = () => {
                                 justifyContent: "space-between",
                               }}
                             >
-                            <Text strong style={{ flex: 1, color: "black" }}>
+                              <Text strong style={{ flex: 1, color: "black" }}>
                                 Credit Days:
                               </Text>
                               <Text strong style={{ color: "black" }}>
                                 {item.creditDays}
-                                </Text>
+                              </Text>
                             </div>
                             <div
                               style={{
@@ -480,7 +481,7 @@ const Approved2List = () => {
                                 justifyContent: "space-between",
                               }}
                             >
-                            <Text strong style={{ flex: 1, color: "black" }}>
+                              <Text strong style={{ flex: 1, color: "black" }}>
                                 Credit Limit:
                               </Text>
                               <Text strong style={{ color: "black" }}>
@@ -488,7 +489,7 @@ const Approved2List = () => {
                                   minimumFractionDigits: 2,
                                   maximumFractionDigits: 2,
                                 }).format(item.creditLimit)}
-                                </Text>
+                              </Text>
                             </div>
                             <div
                               style={{
@@ -524,51 +525,60 @@ const Approved2List = () => {
                               )}
                             </div> */}
 
-{item.approved2on && (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-    }}
-  >
-    <Text strong style={{ flex: 1, color: "black" }}>
-      2nd Approved On:
-    </Text>
-    <Text strong style={{ color: "black" }}>
-      {new Date(item.approved2on).toLocaleDateString("en-GB")}
-    </Text>
-  </div>
-)}
+                            {item.approved2on && (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <Text
+                                  strong
+                                  style={{ flex: 1, color: "black" }}
+                                >
+                                  2nd Approved On:
+                                </Text>
+                                <Text strong style={{ color: "black" }}>
+                                  {new Date(
+                                    item.approved2on
+                                  ).toLocaleDateString("en-GB")}
+                                </Text>
+                              </div>
+                            )}
 
-
-{item.approved3on && (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-    }}
-  >
-    <Text strong style={{ flex: 1, color: "black" }}>
-      2nd Approved On:
-    </Text>
-    <Text strong style={{ color: "black" }}>
-      {new Date(item.approved3on).toLocaleDateString("en-GB")}
-    </Text>
-  </div>
-)}
+                            {item.approved3on && (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <Text
+                                  strong
+                                  style={{ flex: 1, color: "black" }}
+                                >
+                                  2nd Approved On:
+                                </Text>
+                                <Text strong style={{ color: "black" }}>
+                                  {new Date(
+                                    item.approved3on
+                                  ).toLocaleDateString("en-GB")}
+                                </Text>
+                              </div>
+                            )}
                             <Space
                               style={{ float: "right", marginTop: "10px" }}
                             >
                               {theme === "light" ? (
                                 <img
                                   src={checkcircle}
-                                  style={{ width: "70px" }}
+                                  style={{ width: "60px" }}
                                   alt="approved"
                                 />
                               ) : (
                                 <img
                                   src={checkcircle}
-                                  style={{ width: "70px" }}
+                                  style={{ width: "60px" }}
                                   alt="approved"
                                 />
                               )}
