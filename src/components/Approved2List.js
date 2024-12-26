@@ -316,7 +316,7 @@ const Approved2List = () => {
                 >
                   {/* <Text strong style={{ fontSize: '20px' }}>Approved Lists</Text> */}
 
-                  <p>Approved Listss</p>
+                  <p>Approved Lists</p>
 
                   <div>
                     <Button
@@ -390,14 +390,12 @@ const Approved2List = () => {
                               gap: "5px",
                             }}
                           >
-                            <div
+                              <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                color: "black",
                               }}
                             >
-                              {/* <Text strong style={{ flex: 1 }}>Name:</Text> */}
                               <Text strong style={{ color: "black" }}>
                                 {item.name}
                               </Text>
@@ -407,16 +405,29 @@ const Approved2List = () => {
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                marginTop: "8px",
                               }}
                             >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Doc ID:
-                              </Text>
                               <Text strong style={{ color: "black" }}>
-                                {item.expenceId}
+                                {item.category}
                               </Text>
                             </div>
+
+                            
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              {/* <Text strong style={{ flex: 1, color: "black" }}>
+                                SalesPerson:
+                              </Text> */}
+                              <Text strong style={{ color: "black" }}>
+                              {item.salespersonName}
+                              </Text>
+                            </div>
+                            
+                           
                             <div
                               style={{
                                 display: "flex",
@@ -424,45 +435,14 @@ const Approved2List = () => {
                               }}
                             >
                               <Text strong style={{ flex: 1, color: "black" }}>
-                                Doc Date:
+                                Curr | Credit Days:
                               </Text>
                               <Text strong style={{ color: "black" }}>
-                                {" "}
-                                {new Date(item.docDate).toLocaleDateString(
-                                  "en-GB"
-                                )}{" "}
+                                {item.currency} | {item.creditDays}
                               </Text>
                             </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Amount:
-                              </Text>
-                              <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat("en-IN", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }).format(item.amount)}
-                              </Text>
-                            </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Currency:
-                              </Text>
-                              <Text strong style={{ color: "black" }}>
-                                {item.currency}
-                              </Text>
-                            </div>
-                            <div
+
+                            {/* <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -474,7 +454,22 @@ const Approved2List = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.creditDays}
                               </Text>
+                            </div> */}
+
+<div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Controlling Branch:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.controllingOffice}
+                              </Text>
                             </div>
+
                             <div
                               style={{
                                 display: "flex",
@@ -485,12 +480,179 @@ const Approved2List = () => {
                                 Credit Limit:
                               </Text>
                               <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat("en-IN", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }).format(item.creditLimit)}
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.creditLimit
+                                )}
                               </Text>
                             </div>
+
+                            
+
+                            
+                            
+
+
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Total Due:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.outStanding
+                                )}
+                              </Text>
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Excess Credit:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.excessCredit
+                                )}
+                              </Text>
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Due Beyond {item.creditDays}:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.osBeyond
+                                )}
+                              </Text>
+                            </div>
+
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                              Category:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.category}
+                              </Text>
+                            </div> */}
+
+{/*                             
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                              Controlling Office:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.controllingoffice}
+                              </Text>
+                            </div> */}
+{/*           
+          
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Due Days:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.exceedDays}
+                              </Text>
+                            </div> */}
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                              Policy :
+                              </Text>
+
+                              <Text strong style={{ color: "black" }}>
+                                <b> {item.slabRemarks} Exceed </b>
+                              </Text>
+                            </div>
+
+                            
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-evenly",
+                                marginTop: "10px",
+                              }}
+                            >
+                              {/* <Text strong style={{ flex: 1, color: "black" }}>
+                                Invoice No:
+                              </Text> */}
+                              <Text strong style={{ color: "black" }}>
+                                {item.expenceId} | {new Date(item.docDate).toLocaleDateString(
+                                  "en-GB"
+                                )}{" "} |  {new Intl.NumberFormat("en-IN").format(
+                                  item.amount
+                                )}
+                              </Text>
+                            </div>
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                {/* Doc Date: }
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Date(item.docDate).toLocaleDateString(
+                                  "en-GB"
+                                )}{" "} |  {new Intl.NumberFormat("en-IN").format(
+                                  item.amount
+                                )}
+                              </Text>
+                            </div> */}
+
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                {/* Amount: }
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.amount
+                                )}
+                              </Text>
+                            </div> */}
+
                             <div
                               style={{
                                 display: "flex",
@@ -572,13 +734,13 @@ const Approved2List = () => {
                               {theme === "light" ? (
                                 <img
                                   src={checkcircle}
-                                  style={{ width: "60px" }}
+                                  style={{ width: "30px" }}
                                   alt="approved"
                                 />
                               ) : (
                                 <img
                                   src={checkcircle}
-                                  style={{ width: "60px" }}
+                                  style={{ width: "30px" }}
                                   alt="approved"
                                 />
                               )}

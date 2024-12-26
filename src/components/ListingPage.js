@@ -44,6 +44,7 @@ const ListingPage = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [filter, setFilter] = useState({
     name: "",
+    branchCode: "",
     amount: "",
     startDate: null,
     endDate: null,
@@ -185,6 +186,7 @@ const ListingPage = () => {
         }
 
         fetchData();
+
         // setIsModalOpen(false); // Uncomment if necessary
       } else {
         notification.error({
@@ -264,6 +266,11 @@ const ListingPage = () => {
       (item.name &&
         item.name.toLowerCase().includes(filter.name?.toLowerCase() || ""));
 
+        const branchMatch =
+        filter.branchCode === "" ||
+        (item.branchCode &&
+          item.branchCode.toLowerCase().includes(filter.branchCode?.toLowerCase() || ""));
+
     const amountMatch =
       filter.amount === null ||
       (item.amount && item.amount.includes(filter.amount));
@@ -283,6 +290,7 @@ const ListingPage = () => {
 
     return (
       nameMatch &&
+      branchMatch &&
       amountMatch &&
       currencyMatch &&
       startDateMatch &&
@@ -420,6 +428,13 @@ const ListingPage = () => {
         style={{ width: "200px" }}
       />
       <Input
+        name="branchCode"
+        value={filter.branchCode}
+        onChange={handleFilterChange}
+        placeholder="Filter by BranchCode"
+        style={{ width: "200px" }}
+      />
+      <Input
         name="amount"
         value={filter.amount}
         onChange={handleFilterChange}
@@ -436,6 +451,8 @@ const ListingPage = () => {
       />
     </Space>
   );
+
+
 
   return (
     <ConfigProvider theme={themeConfig}>
@@ -515,7 +532,7 @@ const ListingPage = () => {
                     padding: "15px",
                   }}
                 >
-                  <p>Invoice Requests</p>
+                  <p>Additional Credit Requests</p>
                   <div>
                     <Button
                       type="text"
@@ -598,63 +615,45 @@ const ListingPage = () => {
                             <div
                               style={{
                                 display: "flex",
-                                justifyContent: "space-evenly",
-                                marginTop: "10px",
-                              }}
-                            >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Doc ID:
-                              </Text>
-                              <Text strong style={{ color: "black" }}>
-                                {item.expenceId}
-                              </Text>
-                            </div>
-                            <div
-                              style={{
-                                display: "flex",
                                 justifyContent: "space-between",
                               }}
                             >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Doc Date:
-                              </Text>
                               <Text strong style={{ color: "black" }}>
-                                {new Date(item.docDate).toLocaleDateString(
-                                  "en-GB"
-                                )}{" "}
-                              </Text>
-                            </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Amount:
-                              </Text>
-                              <Text strong style={{ color: "black" }}>
-                                {new Intl.NumberFormat("en-IN", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }).format(item.amount)}
-                              </Text>
-                            </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <Text strong style={{ flex: 1, color: "black" }}>
-                                Currency:
-                              </Text>
-                              <Text strong style={{ color: "black" }}>
-                                {item.currency}
+                                {item.category}
                               </Text>
                             </div>
 
+                            
                             <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              {/* <Text strong style={{ flex: 1, color: "black" }}>
+                                SalesPerson:
+                              </Text> */}
+                              <Text strong style={{ color: "black" }}>
+                              {item.salespersonName}
+                              </Text>
+                            </div>
+                            
+                           
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Curr | Credit Days:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.currency} | {item.creditDays}
+                              </Text>
+                            </div>
+
+                            {/* <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -665,6 +664,20 @@ const ListingPage = () => {
                               </Text>
                               <Text strong style={{ color: "black" }}>
                                 {item.creditDays}
+                              </Text>
+                            </div> */}
+
+<div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Controlling Branch:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.controllingOffice}
                               </Text>
                             </div>
 
@@ -683,6 +696,13 @@ const ListingPage = () => {
                                 )}
                               </Text>
                             </div>
+
+                            
+
+                            
+                            
+
+
 
                             <div
                               style={{
@@ -707,15 +727,61 @@ const ListingPage = () => {
                               }}
                             >
                               <Text strong style={{ flex: 1, color: "black" }}>
-                                UnApproved:
+                                Excess Credit:
                               </Text>
                               <Text strong style={{ color: "black" }}>
                                 {new Intl.NumberFormat("en-IN").format(
-                                  item.unApproveAmt
+                                  item.excessCredit
                                 )}
                               </Text>
                             </div>
 
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Due Beyond {item.creditDays}:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.osBeyond
+                                )}
+                              </Text>
+                            </div>
+
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                              Category:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.category}
+                              </Text>
+                            </div> */}
+
+{/*                             
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                              Controlling Office:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.controllingoffice}
+                              </Text>
+                            </div> */}
+{/*           
+          
                             <div
                               style={{
                                 display: "flex",
@@ -728,6 +794,54 @@ const ListingPage = () => {
                               <Text strong style={{ color: "black" }}>
                                 {item.exceedDays}
                               </Text>
+                            </div> */}
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                              Policy :
+                              </Text>
+
+                              <Text strong style={{ color: "black" }}>
+                                <b> {item.slabRemarks} Exceed </b>
+                              </Text>
+                            </div>
+
+
+
+                            
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-evenly",
+                                marginTop: "10px",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                Invoice No:
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {item.expenceId}
+                              </Text>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <Text strong style={{ flex: 1, color: "black" }}>
+                                {/* Doc Date: */}
+                              </Text>
+                              <Text strong style={{ color: "black" }}>
+                                {new Date(item.docDate).toLocaleDateString(
+                                  "en-GB"
+                                )}{" "}
+                              </Text>
                             </div>
 
                             <div
@@ -737,17 +851,18 @@ const ListingPage = () => {
                               }}
                             >
                               <Text strong style={{ flex: 1, color: "black" }}>
-                                Exceeded:
+                                {/* Amount: */}
                               </Text>
-
                               <Text strong style={{ color: "black" }}>
-                                <b> {item.slabRemarks} </b>
+                                {new Intl.NumberFormat("en-IN").format(
+                                  item.amount
+                                )}
                               </Text>
                             </div>
 
                             {/* <br /> */}
                             {/* Approve/Reject Buttons on Card */}
-                            <Space style={{ marginTop: "10px" }}>
+                            <Space style={{ marginTop: "10px",marginLeft: "50px" }}>
                               <Button
                                 id="celebrateBtn"
                                 type="default"
@@ -881,7 +996,7 @@ const ListingPage = () => {
         {emailFlag && (
           <EmailConfig
             updatedEmployee={"Admin"}
-            toEmail={"Jayabalan.guru@uniworld-logistics.com"}
+            toEmail={"nitin.d@uniworld-logistics.com,senthil.kumar@uniworld-logistics.com"}
             data={emailData}
           />
         )}
@@ -890,7 +1005,7 @@ const ListingPage = () => {
           <EmailConfig
             updatedEmployee={"Admin"}
             toEmail={
-              "Jayabalan.guru@uniworld-logistics.com,gjayabalan08@gmail.com"
+              "nitin.d@uniworld-logistics.com,senthil.kumar@uniworld-logistics.com"
             }
             data={emailData}
           />
