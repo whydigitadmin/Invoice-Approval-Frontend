@@ -3,6 +3,14 @@ import { useEffect, useRef, useState } from "react";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const toInitCap = (str) => {
+  return str
+    .split(".")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(".");
+};
+
+
 const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
   if (emailSentFlag.current) return; // Prevent email sending if already triggered
 
@@ -23,12 +31,17 @@ const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
         currency: item.currency,
         description: item.description || "N/A",
         docId: item.docId,
-        docDate: item.docDate,
+        docDate: item.docDate ? new Date(item.docDate).toLocaleDateString("en-GB"):"", 
         outStanding: item.outStanding ? new Intl.NumberFormat('en-IN').format(item.outStanding) : "0", // Indian format
         creditLimit: item.creditLimit ? new Intl.NumberFormat('en-IN').format(item.creditLimit) : "0", // Indian format
         exceedDays: item.exceedDays,
         slabRemarks: item.slabRemarks,
         creditDays: item.creditDays,
+        category: item.category,
+        controllingOffice: item.controllingOffice,
+        salespersonName:item.salespersonName,
+        excessCredit: item.excessCredit ? new Intl.NumberFormat('en-IN').format(item.excessCredit) : "0", // Indian format
+        osBeyond:item.osBeyond ?  new Intl.NumberFormat('en-IN').format(item.osBeyond) : "0", // Indian format
         approveLink,
         rejectLink,
       };
@@ -41,7 +54,8 @@ const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
       );
 
       console.log(`Email sent successfully for item ${i + 1}:`, response);
-      await delay(1000); // Delay 1 second between emails
+      await delay(1000); 
+      window.location.reload()// Delay 1 second between emails
     } catch (error) {
       console.error(`Error sending email for item ${i + 1}:`, error);
     }
