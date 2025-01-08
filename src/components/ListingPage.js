@@ -162,6 +162,7 @@ const ListingPage = () => {
         });
 
         setEmailData([item]);
+        console.log("Email Data",emailData);
 
         // Handle first email flag logic
         if (
@@ -996,7 +997,8 @@ const ListingPage = () => {
         {emailFlag && (
           <EmailConfig
             updatedEmployee={"Admin"}
-            toEmail={"nitin.d@uniworld-logistics.com,senthil.kumar@uniworld-logistics.com"}
+            // toEmail={"nitin.d@uniworld-logistics.com,ugs.supports@uniworld-logistics.com"}
+            toEmail={"jayabalan.guru@uniworld-logistics.com"}
             data={emailData}
           />
         )}
@@ -1004,9 +1006,8 @@ const ListingPage = () => {
         {emailFlag2 && (
           <EmailConfig
             updatedEmployee={"Admin"}
-            toEmail={
-              "nitin.d@uniworld-logistics.com,senthil.kumar@uniworld-logistics.com"
-            }
+            // toEmail={"nitin.d@uniworld-logistics.com,ugs.supports@uniworld-logistics.com"}
+            toEmail={"jayabalan.guru@uniworld-logistics.com"}
             data={emailData}
           />
         )}

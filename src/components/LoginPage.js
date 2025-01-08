@@ -9,6 +9,8 @@ import Loader from "../utils/Loader";
 import { encryptPassword } from "../utils/passEnc";
 import "./logintest1.css";
 import "./style.css";
+import FireworksAnimation from "./FireWorkAnimation";
+
 
 const { Text } = Typography;
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8091";
@@ -272,6 +274,8 @@ const LoginPage = () => {
       <li>D</li>
     </ul>
     </body> */}
+    
+    {/* <FireworksAnimation/> */}
 
       <div
         style={{
@@ -284,6 +288,7 @@ const LoginPage = () => {
           // background:"#cd995f"
         }}
       >
+        
         {(error || success) && (
           <div
             style={{
@@ -330,12 +335,12 @@ const LoginPage = () => {
 
           {/* <br/> */}
 
-          <h2 style={{ ...baseStyle, ...elegantShadowStyle }}>
-            <img src={logoonly} width="200"></img>
+          <h2 style={{ ...baseStyle, ...elegantShadowStyle   }}>
+            <img src={logoonly} width="150"></img>
             Uniworld <br />
-            Logistics
-            {/* <span>Uniworld</span> <br/>
-  <span>Logistics</span> */}
+            Logistics <br/><br/>
+            {/* <span>Happy</span> <br/>
+  <span>New Year 2025</span> */}
           </h2>
         </div>
 
@@ -357,6 +362,7 @@ const LoginPage = () => {
                 // fontSize: 20,
                 // textAlign: "center",
                 color: cardStyle.color,
+               
               }}
             >
               {/* <h1>Uniworld<br/><span style={{background:"white"}}>Welcome!!!</span></h1>         */}
@@ -391,21 +397,22 @@ const LoginPage = () => {
           }
           style={{
             borderRadius: 12,
-            padding: "25px",
+            padding: "1px",
             width: "100%",
-            maxWidth: 400,
+            maxWidth: 300,
+            maxHeight: 320,
             backgroundColor: cardStyle.backgroundColor,
             borderColor: cardStyle.borderColor,
             boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
           }}
         >
           {/* <img src={logo} alt="Logo" className="logo" /> */}
-          <Space direction="vertical" style={{ width: "100%" }}>
+          <Space direction="vertical" style={{ width: "100%",padding: "1px" }}>
             <Text
               style={{
                 fontSize: 16,
                 textAlign: "center",
-                marginBottom: "15px",
+                marginBottom: "12px",
                 color: cardStyle.color,
               }}
             >
@@ -416,7 +423,7 @@ const LoginPage = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
               style={{
-                padding: "10px",
+                padding: "4px",
                 fontSize: 16,
                 borderRadius: 8,
                 ...inputStyle,
@@ -444,10 +451,10 @@ const LoginPage = () => {
                   onChange={(e) => handleChange(e.target.value, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   style={{
-                    width: "40px",
-                    height: "40px",
+                    width: "30px",
+                    height: "30px",
                     textAlign: "center",
-                    fontSize: "16px",
+                    fontSize: "14px",
                     borderRadius: "8px",
                     ...inputStyle,
                   }}

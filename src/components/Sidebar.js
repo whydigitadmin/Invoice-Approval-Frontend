@@ -41,6 +41,7 @@ const Sidebar = () => {
     { text: "Listing", icon: <ListAltIcon />, path: "/listing" },
     { text: "Approved List", icon: <VerifiedIcon />, path: "/ApprovedList" },
     { text: "Approved2 List", icon: <VerifiedIcon />, path: "/Approved2List" },
+    { text: "MIS", icon: <VerifiedIcon />, path: "/MIS" },
   ];
 
   // Retrieve screens from localStorage

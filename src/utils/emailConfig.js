@@ -46,12 +46,22 @@ const SendEmail = async (updatedEmployee, toEmail, data, emailSentFlag) => {
         rejectLink,
       };
 
+      console.log("EMail Test",templateParams);
+
       const response = await emailjs.send(
         "service_q0hz34n",
         "template_nbflxja",
         templateParams,
         "gTWhyzzADVerWfkpS"
       );
+
+      // TEST
+      // const response = await emailjs.send(
+      //   "service_9y1nnmh",
+      //   "template_823h83c",
+      //   templateParams,
+      //   "A7IEQ6ucoMSeZNw--"
+      // );
 
       console.log(`Email sent successfully for item ${i + 1}:`, response);
       await delay(1000); 

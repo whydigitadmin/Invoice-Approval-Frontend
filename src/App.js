@@ -10,6 +10,10 @@ import Overview from "./components/Overview";
 import { Reports } from "./components/Reports";
 import { Screen } from "./components/Screen";
 import { UserCreation } from "./components/UserCreation";
+import  MIS from "./components/MIS";
+import PartyMasterUpdate from "./components/PartyMasterUpdate";
+import APAgeing from "./components/APAgeing";
+
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
           <Route path="screen" element={<Screen />} />
           <Route path="userCreation" element={<UserCreation />} />
           <Route path="approved2list" element={<Approved2List />} />
+          <Route path="MIS" element={<MIS />} />
+          <Route path="partyMasterUpdate" element={<PartyMasterUpdate />} />
+          <Route path="APAgeing" element={<APAgeing/>}/>
+          
         </Route>
       </Routes>
     </Router>
