@@ -9,6 +9,7 @@ import CommonTable from './CommonTable';
 import dayjs from 'dayjs'; 
 import { MenuItem, CircularProgress } from '@mui/material';
 import "./ApAgeing.css";
+import NoDataAvailable from '../utils/NoDataAvailable';
 
 import moment from 'moment';
 import { format } from 'date-fns';
@@ -31,7 +32,7 @@ export const APAgeing = () => {
   const [slab7,setSlab7]= useState(180);
 
   const [status, setStatus] = useState('');
-  const [asondt, setAsondt] = useState(null);
+  const [asondt, setAsondt] = useState(dayjs().format('DD-MM-YYYY'));
   const [subledgerName,setSubledgerName] =  useState('');
 
   const [subledgerNames,setSubledgerNames] =  useState('');
@@ -85,7 +86,7 @@ export const APAgeing = () => {
     { accessorKey: 'branchName', header: 'Branch', size: 140 },
     { accessorKey: 'subledgerCode', header: 'Vendor Code', size: 140 },
     { accessorKey: 'subledgerName', header: 'Vendor', size: 200 },
-    { accessorKey: 'cbranch', header: 'Ctrl Branch', size: 140 },
+    // { accessorKey: 'cbranch', header: 'Ctrl Branch', size: 140 },
     // { accessorKey: 'salesPersonName', header: 'SalesPerson', size: 140 },
     { accessorKey: 'currency', header: 'Currency', size: 140 },
     { accessorKey: 'docid', header: 'Cost Invoice No', size: 140 },
@@ -197,8 +198,9 @@ export const APAgeing = () => {
           value={subledgerName}
           onChange={(value) => setSubledgerName(value)}
           placeholder="Select a Party"
-          style={{ width: '110%' }} // Ensure the dropdown is wide enough
+          style={{ width: '100%' }} // Ensure the dropdown is wide enough
           loading={loading}
+          
         > 
           {subledgerNames.length > 0 ? (
             subledgerNames.map((party) => (
@@ -289,20 +291,20 @@ export const APAgeing = () => {
     </div>
 
       
-
+<br/>
       
-      <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
-      <label htmlFor="slab-input" style={{ marginBottom: '8px', fontWeight: 'bold' }}>
-        Slab1
-      </label>
-      <input
-        id="slab1"
-        type="text"
-        value="30"
-        onChange={handleInputChange}  // Update state on input change
-        style={{ width: '100px', padding: '5px', fontSize: '14px' }} // Smaller width
-      /> 
-    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
+  <label htmlFor="slab-input" style={{ marginBottom: '8px', fontWeight: 'bold' }}>
+    Slab1
+  </label>
+  <input
+    id="slab1"
+    type="text"
+    value="30"
+    onChange={handleInputChange}  // Update state on input change
+    style={{ width: '80px', padding: '3px', fontSize: '12px' }} // Reduced size
+  /> 
+</div>
 
 <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
   <label htmlFor="slab-input" style={{ marginBottom: '8px', fontWeight: 'bold' }}>
@@ -313,7 +315,7 @@ export const APAgeing = () => {
     type="text"
     value={60}
     // onChange={handleInputChange}  // Uncomment if needed
-    style={{ width: '100px', padding: '5px', fontSize: '14px' }} // Smaller width
+    style={{ width: '80px', padding: '3px', fontSize: '12px' }} // Reduced size
   /> 
 </div>
       
@@ -326,7 +328,7 @@ export const APAgeing = () => {
     type="text"
     value={90}
     // onChange={handleInputChange}  // Uncomment if needed
-    style={{ width: '100px', padding: '5px', fontSize: '14px' }} // Smaller width
+    style={{ width: '80px', padding: '3px', fontSize: '12px' }} // Reduced size
   /> 
 </div>
 <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
@@ -338,7 +340,7 @@ export const APAgeing = () => {
     type="text"
     value={120}
     // onChange={handleInputChange}  // Uncomment if needed
-    style={{ width: '100px', padding: '5px', fontSize: '14px' }} // Smaller width
+    style={{ width: '80px', padding: '3px', fontSize: '12px' }} // Reduced size
   /> 
 </div>
 <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
@@ -350,7 +352,7 @@ export const APAgeing = () => {
     type="text"
     value={150}
     // onChange={handleInputChange}  // Uncomment if needed
-    style={{ width: '100px', padding: '5px', fontSize: '14px' }} // Smaller width
+    style={{ width: '80px', padding: '3px', fontSize: '12px' }} // Reduced size
   /> 
 </div>
 <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
@@ -362,7 +364,7 @@ export const APAgeing = () => {
     type="text"
     value={180}
     // onChange={handleInputChange}  // Uncomment if needed
-    style={{ width: '100px', padding: '5px', fontSize: '14px' }} // Smaller width
+    style={{ width: '80px', padding: '3px', fontSize: '12px' }} // Reduced size
   /> 
 </div>
   {/* <div style={{ display: 'flex', flexDirection: 'column', width: 'auto' }}>
@@ -422,7 +424,7 @@ export const APAgeing = () => {
     {data.length > 0 ? (
       <CommonTable data={data} columns={reportColumns} loading={loading} />
     ) : (
-      <div className="no-records">No records found</div>
+      <NoDataAvailable message="No records to display" />
     )}
   </div>
     </div>
